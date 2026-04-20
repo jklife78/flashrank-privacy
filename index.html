@@ -6,14 +6,15 @@
   <title>FlashRank – Datenschutzerklärung</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 800px; 
-           margin: 40px auto; padding: 0 20px; color: #333; }
+           margin: 40px auto; padding: 0 20px; color: #333; line-height: 1.5; }
     h1 { color: #1a7a1a; }
-    h2 { color: #1a7a1a; margin-top: 30px; }
+    h2 { color: #1a7a1a; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .highlight { background-color: #f9f9f9; padding: 10px; border-left: 4px solid #1a7a1a; margin: 10px 0; }
   </style>
 </head>
 <body>
   <h1>Datenschutzerklärung – FlashRank</h1>
-  <p><strong>Stand: Mai 2025</strong></p>
+  <p><strong>Stand: April 2026</strong></p>
 
   <h2>1. Verantwortlicher</h2>
   <p>Joachim Komsthöft<br>
@@ -21,30 +22,32 @@
   50859 Köln<br>
   E-Mail: support@komsthoeft.de</p>
 
-  <h2>2. Keine Erhebung personenbezogener Daten</h2>
-  <p>FlashRank erhebt, speichert und verarbeitet keinerlei 
-  personenbezogene Daten der Nutzer. Es werden keine Namen, 
-  E-Mail-Adressen, Standortdaten oder sonstige personenbezogene 
-  Informationen erfasst oder an Dritte weitergegeben.</p>
+  <h2>2. Datensparsamkeit & Pseudonyme Daten</h2>
+  <p>FlashRank ist auf maximale Datensparsamkeit ausgelegt. Wir erheben <strong>keine</strong> direkt personenbezogenen Daten wie Namen, E-Mail-Adressen oder Standortdaten. Für die Bereitstellung technischer Funktionen (siehe Punkt 4) werden jedoch pseudonyme technische Kennungen verarbeitet.</p>
 
-  <h2>3. Lokale Speicherung</h2>
-  <p>Einstellungen wie Favoriten, Anzeigeoptionen und der 
-  gewählte Farbmodus werden ausschließlich lokal auf dem Gerät 
-  des Nutzers gespeichert (AsyncStorage). Diese Daten verlassen 
-  das Gerät nicht und werden nicht übertragen.</p>
+  <h2>3. Lokale und serverseitige Speicherung</h2>
+  <p>Die meisten Einstellungen (Farbmodus, Anzeigeoptionen) werden ausschließlich lokal auf deinem Gerät gespeichert (AsyncStorage). Diese Daten verlassen dein Gerät nicht.</p>
+  <div class="highlight">
+    <p>Sofern du die <strong>Push-Benachrichtigungen</strong> für Athleten oder Wettkämpfe aktivierst, werden folgende Informationen an unseren Server übertragen und dort gespeichert:</p>
+    <ul>
+      <li>Eine anonyme Gerätekennung (Device-ID)</li>
+      <li>Ein technischer Push-Token (notwendig für die Zustellung)</li>
+      <li>Deine gewählten Favoriten (Athleten/Wettkämpfe), für die du Benachrichtigungen erhalten möchtest</li>
+    </ul>
+    <p>Diese Daten dienen ausschließlich der App-Funktionalität und werden nicht mit einer realen Identität verknüpft.</p>
+  </div>
 
-  <h2>4. Datenquelle</h2>
-  <p>Wettkampfergebnisse werden live von der öffentlichen 
-  Schnittstelle dav.results.info abgerufen. Dabei werden 
-  keinerlei nutzerbezogene Informationen übertragen.</p>
+  <h2>4. Push-Benachrichtigungen (Expo)</h2>
+  <p>Für den Versand von Benachrichtigungen nutzen wir den Dienst <strong>Expo Push Notifications</strong> (650 Industries, Inc.). Dabei wird der anonyme Push-Token an die Infrastruktur von Expo übermittelt, um die Nachricht technisch an dein Gerät zuzustellen.</p>
 
-  <h2>5. Keine Werbung, kein Tracking</h2>
-  <p>FlashRank enthält keine Werbung und verwendet keinerlei 
-  Tracking- oder Analyse-Tools (z.B. Google Analytics, 
-  Firebase Analytics).</p>
+  <h2>5. Datenquelle & Server-Protokolle</h2>
+  <p>Wettkampfergebnisse werden von der öffentlichen Schnittstelle <em>dav.results.info</em> abgerufen. Um die Stabilität unseres Proxy-Servers zu gewährleisten und Missbrauch vorzubeugen, werden IP-Adressen kurzzeitig verarbeitet (Rate Limiting). Es erfolgt keine dauerhafte Speicherung oder Profilbildung basierend auf deiner IP-Adresse.</p>
 
-  <h2>6. Kontakt</h2>
-  <p>Bei Fragen zum Datenschutz wende dich an:<br>
-  support@komsthoeft.de</p>
+  <h2>6. Keine Werbung, kein Tracking</h2>
+  <p>FlashRank ist eine werbefreie Fan-App. Wir verwenden keine Analyse-Tools (wie Google Analytics oder Firebase) zur Auswertung deines Nutzerverhaltens.</p>
+
+  <h2>7. Kontakt</h2>
+  <p>Bei Fragen zum Datenschutz wende dich bitte an:<br>
+  <a href="mailto:support@komsthoeft.de">support@komsthoeft.de</a></p>
 </body>
 </html>
