@@ -9,37 +9,49 @@
     <meta property="og:title" content="FlashRank App laden">
     <meta property="og:description" content="Hier geht es direkt zum Download für iOS und Android.">
 
-    <!-- Das Bild, das Instagram/Social Media als Vorschau zieht (Jetzt korrigiert auf .io) -->
+    <!-- Das Bild, das Instagram/Social Media als Vorschau zieht -->
     <meta property="og:image" content="https://jklife78.github.io/flashrank-privacy/logo.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
 
-    <!-- Kleines Icon oben im Browser-Tab (Jetzt korrigiert auf image/png) -->
+    <!-- Kleines Icon oben im Browser-Tab -->
     <link rel="icon" type="image/png" href="logo.png">
 
     <script>
-        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        window.addEventListener("DOMContentLoaded", function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-        // Wenn es ein iPhone/iPad ist, leite zum Apple App Store weiter
-        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            window.location.href = "https://apps.apple.com/us/app/flashrank/id6761028403";
-        } 
-        // Wenn es ein Android-Gerät ist, leite zu Google Play weiter
-        else if (/android/i.test(userAgent)) {
-            window.location.href = "https://play.google.com/store/apps/details?id=de.komsthoeft.flashrank";
-        } 
-        // PC/Mac oder unbekannt -> Fallback auf deine Support-Website
-        else {
-            window.location.href = "https://jklife78.github.io/flashrank-privacy/support.html";
-        }
+            // Kurze Verzögerung, um In-App-Browser-Fehler zu vermeiden
+            setTimeout(function() {
+                // Wenn es ein iPhone/iPad ist, leite zum Apple App Store weiter
+                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    window.location.href = "https://apps.apple.com/us/app/flashrank/id6761028403";
+                } 
+                // Wenn es ein Android-Gerät ist, öffne direkt die native Play Store App
+                else if (/android/i.test(userAgent)) {
+                    window.location.href = "market://details?id=de.komsthoeft.flashrank";
+                    
+                    // Fallback, falls das Gerät den "market://" Link wider Erwarten nicht kennt
+                    setTimeout(function() {
+                        window.location.href = "https://play.google.com/store/apps/details?id=de.komsthoeft.flashrank";
+                    }, 500);
+                } 
+                // PC/Mac oder unbekannt -> Fallback auf deine Support-Website
+                else {
+                    window.location.href = "https://jklife78.github.io/flashrank-privacy/support.html";
+                }
+            }, 300); // 300 Millisekunden warten
+        });
     </script>
 </head>
 <body>
-    <!-- Optional: Ein kurzer Text, falls die Weiterleitung bei jemandem blockiert wird -->
     <p style="font-family: sans-serif; text-align: center; margin-top: 50px;">
         Weiterleitung zur FlashRank App... <br>
-        <small>Falls nichts passiert, klicke <a href="https://jklife78.github.io/flashrank-privacy/support.html">hier</a>.</small>
+        <small>Falls nichts passiert, wähle deinen Store: <br><br>
+            <a href="https://apps.apple.com/us/app/flashrank/id6761028403" style="color: #007bff; text-decoration: none; font-weight: bold;">[ für iPhone ]</a> &nbsp;&nbsp;
+            <a href="https://play.google.com/store/apps/details?id=de.komsthoeft.flashrank" style="color: #28a745; text-decoration: none; font-weight: bold;">[ für Android ]</a>
+        </small>
     </p>
 </body>
 </html>
