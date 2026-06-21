@@ -20,24 +20,29 @@
     <!-- Kleines Icon oben im Browser-Tab -->
     <link rel="icon" type="image/png" href="logo.png">
 
-    <script>
-        (function() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+<script>
+    (function() {
+        var userAgent = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
 
-            // 1. Wenn es ein iPhone/iPad ist -> Sofort zum Apple App Store
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = "https://apps.apple.com/us/app/flashrank/id6761028403";
-            } 
-            // 2. Wenn es ein Android-Gerät ist -> WhatsApp-Bypass direkt in die Play Store App zwingen
-            else if (/android/i.test(userAgent)) {
-                window.location.href = "intent://play.google.com/store/apps/details?id=de.komsthoeft.flashrank#Intent;scheme=https;package=com.android.vending;end";
-            } 
-            // 3. PC/Mac oder unbekannt -> Fallback auf deine Support-Website
-            else {
-                window.location.href = "https://jklife78.github.io/flashrank-privacy/support.html";
-            }
-        })();
-    </script>
+        // 1. Wenn es ein iPhone/iPad ist -> Sofort zum Apple App Store
+        if (/ipad|iphone|ipod/.test(userAgent) && !window.MSStream) {
+            window.location.href = "https://apps.apple.com/us/app/flashrank/id6761028403";
+        } 
+        
+        // 2. Wenn es ein Android-Gerät ist (Egal ob Smartphone oder Tablet)
+        else if (/android/i.test(userAgent) || (navigator.platform === 'Linux armv8l' && navigator.maxTouchPoints > 1)) {
+            
+            // Ein extrem robuster Intent-Link, der den In-App-Browser von WhatsApp/Facebook sprengt
+            // und direkt die Google Play Store App auf jedem Tablet/Smartphone öffnet
+            window.location.href = "intent://details?id=de.komsthoeft.flashrank#Intent;scheme=market;package=com.android.vending;end";
+        } 
+        
+        // 3. PC/Mac oder unklares Gerät -> Fallback auf deine Support-Website
+        else {
+            window.location.href = "https://jklife78.github.io/flashrank-privacy/support.html";
+        }
+    })();
+</script>
 
     <style>
         body {
