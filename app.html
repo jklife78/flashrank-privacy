@@ -4,45 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Der Titel und die Beschreibung für die Link-Vorschau -->
     <title>FlashRank App laden</title>
     <meta property="og:title" content="FlashRank App laden">
     <meta property="og:description" content="Hier geht es direkt zum Download für iOS und Android.">
-
-    <!-- Das Bild, das in WhatsApp/Social Media als Vorschau zieht -->
     <meta property="og:image" content="https://jklife78.github.io/flashrank-privacy/bild.jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
-<meta property="og:url" content="https://jklife78.github.io/flashrank-privacy/app.html">
-<meta property="fb:app_id" content="123456789">
+    <meta property="og:url" content="https://jklife78.github.io/flashrank-privacy/app.html">
     
-    <!-- Kleines Icon oben im Browser-Tab -->
     <link rel="icon" type="image/png" href="logo.png">
-
-<script>
-    (function() {
-        var userAgent = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
-
-        // 1. Wenn es ein iPhone/iPad ist -> Sofort zum Apple App Store
-        if (/ipad|iphone|ipod/.test(userAgent) && !window.MSStream) {
-            window.location.href = "https://apps.apple.com/us/app/flashrank/id6761028403";
-        } 
-        
-        // 2. Wenn es ein Android-Gerät ist (Egal ob Smartphone oder Tablet)
-        else if (/android/i.test(userAgent) || (navigator.platform === 'Linux armv8l' && navigator.maxTouchPoints > 1)) {
-            
-            // Ein extrem robuster Intent-Link, der den In-App-Browser von WhatsApp/Facebook sprengt
-            // und direkt die Google Play Store App auf jedem Tablet/Smartphone öffnet
-            window.location.href = "intent://details?id=de.komsthoeft.flashrank#Intent;scheme=market;package=com.android.vending;end";
-        } 
-        
-        // 3. PC/Mac oder unklares Gerät -> Fallback auf deine Support-Website
-        else {
-            window.location.href = "https://jklife78.github.io/flashrank-privacy/support.html";
-        }
-    })();
-</script>
 
     <style>
         body {
@@ -60,7 +31,7 @@
 
         .container {
             text-align: center;
-            max-width: 500px; /* Etwas breiter für das Querformat-Bild */
+            max-width: 500px;
             width: 100%;
         }
 
@@ -68,7 +39,7 @@
             width: 100%;
             height: auto;
             max-height: 250px;
-            object-fit: cover; /* Verhindert, dass das Bild verzerrt wird */
+            object-fit: cover;
             border-radius: 16px;
             margin-bottom: 32px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -79,9 +50,29 @@
             font-size: 16px;
             font-weight: 500;
             animation: pulse 1.5s infinite ease-in-out;
+            margin-bottom: 20px;
         }
 
-        /* Kleiner visueller Effekt für den Ladetext */
+        /* Der Fallback-Button, falls die Automatik auf dem Tablet blockiert */
+        .store-button {
+            display: inline-block;
+            background-color: #1f8a3a;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(31, 138, 58, 0.3);
+            transition: background-color 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        .store-button:active {
+            transform: scale(0.98);
+            background-color: #1a7531;
+        }
+
         @keyframes pulse {
             0% { opacity: 0.6; }
             50% { opacity: 1; }
@@ -92,14 +83,57 @@
 <body>
 
     <div class="container">
-        <!-- Dein breites Bild im Querformat -->
         <img src="Bild.jpg" alt="FlashRank Preview" class="banner-img">
         
-        <!-- Der Ladetext unter dem Bild -->
         <div class="loading-text">
             <p>Verbindung zum Store wird hergestellt...</p>
         </div>
+
+        <a id="fallback-btn" href="https://jklife78.github.io/flashrank-privacy/support.html" class="store-button">
+            Direkt zum Store wechseln
+        </a>
     </div>
+
+    <script>
+        (function() {
+            var userAgent = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
+            
+            // Die Links sauber definieren
+            var iosLink = "https://apps.apple.com/us/app/flashrank/id6761028403";
+            var androidLink = "intent://details?id=de.komsthoeft.flashrank#Intent;scheme=market;package=com.android.vending;end";
+            var fallbackLink = "https://jklife78.github.io/flashrank-privacy/support.html";
+            
+            var targetLink = fallbackLink;
+
+            // Erkennung logisch aufschlüsseln
+            var isIOS = /ipad|iphone|ipod/.test(userAgent) && !window.MSStream;
+            var isAndroid = /android/.test(userAgent);
+            
+            // Tablet-Spezialfall: Erkennt iPads und Android-Tablets im Desktop-Modus (maxTouchPoints)
+            var isTabletDesktopMode = (navigator.maxTouchPoints && navigator.maxTouchPoints > 1 && (/macintosh/.test(userAgent) || /linux/.test(userAgent)));
+
+            if (isIOS) {
+                targetLink = iosLink;
+            } else if (isAndroid) {
+                targetLink = androidLink;
+            } else if (isTabletDesktopMode) {
+                // Wenn wir Touchpunkte auf Linux haben, ist es sehr wahrscheinlich ein Android-Tablet im PC-Modus
+                if (/linux/.test(userAgent)) {
+                    targetLink = androidLink;
+                } else {
+                    targetLink = iosLink;
+                }
+            }
+
+            // 1. Button dynamisch an das erkannte Gerät anpassen
+            document.getElementById('fallback-btn').href = targetLink;
+
+            // 2. Sofortige automatische Weiterleitung versuchen
+            if (targetLink !== fallbackLink) {
+                window.location.href = targetLink;
+            }
+        })();
+    </script>
 
 </body>
 </html>
